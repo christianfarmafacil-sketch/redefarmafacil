@@ -1,203 +1,594 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <!-- Metadados Essenciais -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rede Farma Fácil - Cuidando da sua saúde com carinho. Farmácia com duas unidades em Bragança Paulista.">
-    <meta name="keywords" content="farmácia, saúde, medicamentos, Bragança Paulista">
-    <meta name="author" content="Rede Farma Fácil">
-    <meta name="theme-color" content="#e10600">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e10600' width='100' height='100'/><text x='50' y='65' font-size='60' font-weight='bold' fill='white' text-anchor='middle' font-family='Arial'>F</text></svg>">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- TailwindCSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Configuração customizada do Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'farma-red': '#e10600',
-                        'farma-red-dark': '#c20500',
-                        'farma-gray': '#f8f9fa',
-                    },
-                    fontFamily: {
-                        'montserrat': ['Montserrat', 'sans-serif'],
-                        'poppins': ['Poppins', 'sans-serif'],
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                    },
-                }
-            }
-        }
-    </script>
-    
-    <title>Rede Farma Fácil | Cuidando da sua saúde com carinho</title>
-    
-    <!-- Estilos Customizados -->
-    <style>
-        body {
-            background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
-        }
-        
-        .hero-container {
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        .btn-pulse {
-            transition: all 0.3s ease;
-        }
-        
-        .btn-pulse:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(225, 6, 0, 0.2);
-        }
-        
-        .button-container {
-            animation: fadeIn 1s ease-out 0.3s backwards;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Farma Fácil — A farmácia da sua família em Bragança Paulista. Site em construção.">
+<title>Farma Fácil — Em Breve</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red:        #CC0000;
+    --red-dark:   #8B0000;
+    --red-mid:    #E50000;
+    --red-light:  #FF3333;
+    --black:      #0A0A0A;
+    --black-mid:  #141414;
+    --black-soft: #1E1E1E;
+    --white:      #FFFFFF;
+    --off-white:  #F5F5F5;
+    --gray:       #AAAAAA;
+    --gray-dim:   #555555;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  .bg-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-halftone {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(204,0,0,.13) 1.5px, transparent 1.5px);
+    background-size: 38px 38px;
+  }
+  .bg-slash {
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(175deg, var(--red-dark) 0%, var(--red) 60%, var(--red-dark) 100%);
+    clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 0.12;
+  }
+  .bg-slash-line {
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    clip-path: polygon(18% 0%, 19.5% 0%, 1.5% 100%, 0% 100%);
+    background: var(--red);
+    opacity: 0.35;
+  }
+  .bg-top-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-dark));
+  }
+  .bg-bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--red);
+    opacity: 0.5;
+  }
+  .bg-corner-glow {
+    position: absolute;
+    bottom: -200px; left: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204,0,0,.14) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+  .bg-top-glow {
+    position: absolute;
+    top: -150px; right: 5%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204,0,0,.1) 0%, transparent 70%);
+    filter: blur(50px);
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 140px;
+    gap: 0;
+  }
+
+  /* ── LOGO ── */
+  .logo-wrap {
+    margin-bottom: 48px;
+    animation: fadeDown .8s ease both;
+  }
+  .logo-wrap img {
+    height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 24px rgba(204,0,0,.4));
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(204,0,0,.15);
+    border: 1px solid rgba(204,0,0,.4);
+    color: var(--red-light);
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    margin-bottom: 32px;
+    animation: fadeDown .8s .1s ease both;
+  }
+  .badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red-light);
+    animation: pulse 2s infinite;
+  }
+
+  /* ── HEADLINE ── */
+  .headline {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-align: center;
+    margin-bottom: 28px;
+    animation: fadeDown .8s .2s ease both;
+  }
+  .headline .red { color: var(--red-light); }
+  .headline .outline {
+    -webkit-text-stroke: 2px rgba(255,255,255,.2);
+    color: transparent;
+  }
+
+  /* ── SLOGAN ── */
+  .slogan {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeDown .8s .25s ease both;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+    animation: fadeDown .8s .3s ease both;
+  }
+  .div-line { flex: 1; max-width: 120px; height: 1px; background: rgba(255,255,255,.12); }
+  .div-icon { font-size: 18px; opacity: 0.5; }
+
+  /* ── SUBTITLE ── */
+  .subtitle {
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 300;
+    color: rgba(255,255,255,.55);
+    text-align: center;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 64px;
+    animation: fadeDown .8s .35s ease both;
+  }
+  .subtitle strong { color: rgba(255,255,255,.85); font-weight: 700; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 72px;
+    animation: fadeDown .8s .4s ease both;
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.3);
+  }
+  .progress-label span { color: var(--red-light); }
+  .progress-track {
+    height: 4px;
+    background: rgba(255,255,255,.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light));
+    border-radius: 2px;
+    transition: width 2s 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* ── CONTACT LABEL ── */
+  .contact-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.3);
+    margin-bottom: 24px;
+    text-align: center;
+    animation: fadeDown .8s .45s ease both;
+  }
+
+  /* ── BUTTONS ── */
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    max-width: 700px;
+    margin-bottom: 20px;
+    animation: fadeDown .8s .5s ease both;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    border-radius: 2px;
+    font-size: 16px;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,.06);
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .btn:hover::after { opacity: 1; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-whatsapp {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 4px 20px rgba(37,211,102,.3);
+  }
+  .btn-whatsapp:hover { box-shadow: 0 8px 32px rgba(37,211,102,.45); }
+
+  .btn-phone {
+    background: var(--red);
+    color: white;
+    box-shadow: 0 4px 20px rgba(204,0,0,.35);
+  }
+  .btn-phone:hover { box-shadow: 0 8px 32px rgba(204,0,0,.5); }
+
+  .btn-map {
+    background: rgba(255,255,255,.06);
+    color: rgba(255,255,255,.85);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: none;
+  }
+  .btn-map:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.22);
+  }
+
+  .btn-icon { font-size: 20px; flex-shrink: 0; }
+  .btn-text { display: flex; flex-direction: column; gap: 1px; text-align: left; }
+  .btn-main { font-size: 15px; font-weight: 700; line-height: 1.2; }
+  .btn-sub { font-size: 11px; font-weight: 400; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── ACCESS NOTE ── */
+  .access-note {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,.25);
+    text-align: center;
+    letter-spacing: 1px;
+    animation: fadeDown .8s .55s ease both;
+    margin-bottom: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 10;
+    background: rgba(10,10,10,.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 20px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-red-bar {
+    width: 3px;
+    height: 36px;
+    background: var(--red);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .footer-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .footer-cnpj {
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(255,255,255,.25);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .footer-sep {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,.08);
+  }
+  .footer-hours {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .footer-hours-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,.3);
+    letter-spacing: 0.5px;
+  }
+  .footer-hours-item strong { color: rgba(255,255,255,.55); font-weight: 700; }
+  .footer-right {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,.2);
+    letter-spacing: 0.5px;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .footer-right strong { color: rgba(255,255,255,.35); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  @keyframes scanline {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(100vh); }
+  }
+  .scanline {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(204,0,0,.015) 50%,
+      transparent 100%
+    );
+    background-size: 100% 8px;
+    animation: none;
+    opacity: 0.4;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .page { padding: 60px 20px 130px; }
+    .logo-wrap img { height: 68px; }
+    .headline { letter-spacing: -1px; }
+    .buttons { gap: 12px; }
+    .btn { padding: 16px 24px; width: 100%; max-width: 340px; }
+    footer { padding: 16px 20px; }
+    .footer-sep { display: none; }
+    .footer-right { font-size: 11px; }
+  }
+  @media (max-width: 400px) {
+    .headline { font-size: 44px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Container Principal -->
-    <div class="flex flex-col min-h-screen">
-        
-        <!-- Conteúdo Principal (flex-grow para empurrar footer para baixo) -->
-        <div class="flex-grow flex flex-col items-center justify-center px-4 py-8">
-            
-            <!-- Seção Hero com Cabeçalho e Conteúdo -->
-            <div class="hero-container max-w-2xl w-full text-center">
-                
-                <!-- Logo/Branding -->
-                <div class="mb-8">
-                    <div class="mb-6 flex justify-center">
-                        <img src="logo-farma-facil.png" alt="Rede Farma Fácil" class="h-24 w-auto object-contain drop-shadow-lg">
-                    </div>
-                    <p class="text-lg text-gray-600 font-poppins">
-                        Cuidando da sua saúde com carinho
-                    </p>
-                </div>
-                
-                <!-- Divisor Visual -->
-                <div class="h-1 w-16 bg-gradient-to-r from-farma-red to-farma-red-dark rounded-full mx-auto mb-12"></div>
-                
-                <!-- Conteúdo Principal -->
-                <div class="mb-12">
-                    <h2 class="text-5xl md:text-6xl font-bold font-montserrat text-gray-900 mb-4">
-                        Site em Construção
-                    </h2>
-                    <p class="text-xl md:text-2xl text-gray-600 font-poppins mb-8">
-                        Estamos preparando algo especial para você.
-                    </p>
-                </div>
-                
-                <!-- Botões de Ação -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                    
-                    <!-- Botão WhatsApp -->
-                    <a href="https://wa.me/551140345000" target="_blank" rel="noopener noreferrer" class="button-container">
-                        <button class="btn-pulse w-full px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold font-montserrat flex items-center justify-center gap-3 shadow-lg">
-                            <!-- Ícone WhatsApp -->
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.025 0-2.02-.315-2.884-.9L6.864 3.139C7.776 2.427 8.951 2 10.201 2c5.229 0 9.438 4.209 9.438 9.438 0 1.25-.427 2.426-1.139 3.339l-.581-1.451c.585-.863.899-1.859.899-2.888 0-3.046-2.48-5.525-5.528-5.525"/>
-                                <path d="M19.59 3.175L15.5 7.265M3.175 19.59L7.265 15.5"/>
-                            </svg>
-                            <span>WhatsApp</span>
-                        </button>
-                    </a>
-                    
-                    <!-- Botão Telefonar -->
-                    <a href="tel:+551140345000" class="button-container">
-                        <button class="btn-pulse w-full px-8 py-4 bg-farma-red hover:bg-farma-red-dark text-white rounded-xl font-semibold font-montserrat flex items-center justify-center gap-3 shadow-lg">
-                            <!-- Ícone Telefone -->
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/>
-                            </svg>
-                            <span>Ligar</span>
-                        </button>
-                    </a>
-                    
-                    <!-- Botão Google Maps - Loja 1 -->
-                    <a href="https://www.google.com/maps/search/Pra%C3%A7a+Coronel+Jacinto+Os%C3%B3rio,+4+-+Matadouro,+Bragança+Paulista+-+SP,+12910-330" target="_blank" rel="noopener noreferrer" class="button-container" style="animation-delay: 0.15s">
-                        <button class="btn-pulse w-full px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold font-montserrat flex items-center justify-center gap-3 shadow-lg">
-                            <!-- Ícone Localização -->
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5z"/>
-                            </svg>
-                            <span>Loja 1</span>
-                        </button>
-                    </a>
-                    
-                    <!-- Botão Google Maps - Loja 2 -->
-                    <a href="https://www.google.com/maps/search/Tv.+Dona+Carolina+196,+Lava-pés,+Bragança+Paulista+-+SP" target="_blank" rel="noopener noreferrer" class="button-container" style="animation-delay: 0.2s">
-                        <button class="btn-pulse w-full px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold font-montserrat flex items-center justify-center gap-3 shadow-lg">
-                            <!-- Ícone Localização -->
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5z"/>
-                            </svg>
-                            <span>Loja 2</span>
-                        </button>
-                    </a>
-                    
-                </div>
-                
-                <!-- Informação Adicional -->
-                <div class="text-center text-gray-500 text-sm">
-                    <p>Acesse nossos canais de contato acima</p>
-                </div>
-                
-            </div>
-            
-        </div>
-        
-        <!-- Footer Fixo -->
-        <footer class="bg-farma-red text-white py-8 px-4 shadow-2xl">
-            <div class="max-w-4xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center md:text-left text-sm md:text-base">
-                    
-                    <!-- Endereço e CNPJ -->
-                    <div class="space-y-2">
-                        <p class="font-semibold">Unidade 1: Praça Coronel Jacinto Osório, 4 – Matadouro, Bragança Paulista – SP, 12910-330</p>
-                        <p class="font-semibold">Unidade 2: Tv. Dona Carolina, 196 – Lava-pés, Bragança Paulista – SP</p>
-                        <p class="font-semibold">CNPJ: 33.875.087/0002-80</p>
-                    </div>
-                    
-                    <!-- Copyright e Links -->
-                    <div class="space-y-2">
-                        <p>© 2026 Todos os direitos reservados</p>
-                        <p class="font-semibold">RL.X DROGARIAS LTDA</p>
-                        <a href="#" class="underline hover:opacity-80 transition-opacity">Política de Privacidade</a>
-                    </div>
-                    
-                </div>
-                
-                <!-- Linha Divisória -->
-                <div class="border-t border-white border-opacity-30 mt-6 pt-6 text-center text-xs">
-                    <p class="opacity-90">Desenvolvido com ❤️ para cuidar da sua saúde</p>
-                </div>
-                
-            </div>
-        </footer>
-        
+
+<!-- Background layers -->
+<div class="bg-wrapper">
+  <div class="bg-halftone"></div>
+  <div class="bg-slash"></div>
+  <div class="bg-slash-line"></div>
+  <div class="bg-top-bar"></div>
+  <div class="bg-bottom-bar"></div>
+  <div class="bg-corner-glow"></div>
+  <div class="bg-top-glow"></div>
+</div>
+<div class="scanline"></div>
+
+<!-- Main content -->
+<main class="page">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img src="logo-farma-facil.png" alt="Farma Fácil — Rede de Farmácias">
+  </div>
+
+  <!-- Badge -->
+  <div class="badge">
+    <div class="badge-dot"></div>
+    Site em construção
+  </div>
+
+  <!-- Headline -->
+  <h1 class="headline">
+    Estamos <span class="red">preparando</span><br>
+    algo <span class="outline">especial</span><br>
+    para <span class="red">você.</span>
+  </h1>
+
+  <!-- Slogan -->
+  <p class="slogan">Perto de você, cuidando de você</p>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="div-line"></div>
+    <div class="div-icon">❤️</div>
+    <div class="div-line"></div>
+  </div>
+
+  <!-- Subtitle -->
+  <p class="subtitle">
+    Em breve nosso site estará no ar com tudo que você precisa.<br>
+    <strong>Enquanto isso, estamos disponíveis pelos nossos canais.</strong>
+  </p>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progresso</span>
+      <span id="pct">0%</span>
     </div>
-    
+    <div class="progress-track">
+      <div class="progress-fill" id="bar"></div>
+    </div>
+  </div>
+
+  <!-- Contact label -->
+  <p class="contact-label">Acesse nossos canais de contato</p>
+
+  <!-- Buttons -->
+  <div class="buttons">
+
+    <!-- WhatsApp -->
+    <a class="btn btn-whatsapp" href="https://wa.me/551140345000" target="_blank" rel="noopener">
+      <span class="btn-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </span>
+      <div class="btn-text">
+        <span class="btn-main">WhatsApp</span>
+        <span class="btn-sub">(11) 4034-5000</span>
+      </div>
+    </a>
+
+    <!-- Ligação -->
+    <a class="btn btn-phone" href="tel:+551140345000">
+      <span class="btn-icon">📞</span>
+      <div class="btn-text">
+        <span class="btn-main">Ligar agora</span>
+        <span class="btn-sub">(11) 4034-5000</span>
+      </div>
+    </a>
+
+    <!-- Loja 1 -->
+    <a class="btn btn-map"
+       href="https://maps.google.com/?q=Praça+Coronel+Jacinto+Osório+4+Matadouro+Bragança+Paulista"
+       target="_blank" rel="noopener">
+      <span class="btn-icon">📍</span>
+      <div class="btn-text">
+        <span class="btn-main">Loja 1 — Matadouro</span>
+        <span class="btn-sub">Pça. Cel. Jacinto Osório, 4</span>
+      </div>
+    </a>
+
+    <!-- Loja 2 -->
+    <a class="btn btn-map"
+       href="https://maps.google.com/?q=Travessa+Dona+Carolina+196+Lava-pés+Bragança+Paulista"
+       target="_blank" rel="noopener">
+      <span class="btn-icon">📍</span>
+      <div class="btn-text">
+        <span class="btn-main">Loja 2 — Lava-pés</span>
+        <span class="btn-sub">Tv. Dona Carolina, 196</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="access-note">Abertos todos os dias das 8h à meia-noite · Delivery até as 23h por R$ 9,90</p>
+
+</main>
+
+<!-- Footer fixo -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-red-bar"></div>
+    <div>
+      <div class="footer-brand">RL.X Drogarias LTDA</div>
+      <div class="footer-cnpj">CNPJ 33.875.087/0002-80</div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-hours">
+      <div class="footer-hours-item">🕛 <strong>Loja:</strong> todos os dias das 8h às 00h</div>
+      <div class="footer-hours-item">🛵 <strong>Delivery:</strong> todos os dias das 8h às 23h · R$ 9,90 fixo</div>
+    </div>
+  </div>
+  <div class="footer-right">
+    <strong>Rede Farma Fácil © 2026</strong><br>
+    Todos os direitos reservados
+  </div>
+</footer>
+
+<script>
+  // Animate progress bar on load
+  window.addEventListener('load', () => {
+    const bar = document.getElementById('bar');
+    const pct = document.getElementById('pct');
+    const target = 72;
+    bar.style.width = target + '%';
+    let current = 0;
+    const step = () => {
+      if (current < target) {
+        current = Math.min(current + 1, target);
+        pct.textContent = current + '%';
+        requestAnimationFrame(step);
+      }
+    };
+    setTimeout(step, 1000);
+  });
+</script>
+
 </body>
 </html>
