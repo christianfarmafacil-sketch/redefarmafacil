@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farma Fácil · Já estamos te esperando!</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- ══ Google Ads Conversion Tag — substitua pelos seus valores ══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-XXXXXXXXX');
+  gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/YYYYYYYYYYY' });
+</script>
+<!-- ══ fim da tag de conversão ══ -->
+
+<style>
+:root {
+  --red:       #C8171A;
+  --red-dark:  #8C0E11;
+  --amber:     #F4A225;
+  --teal:      #2A9D8F;
+  --cream:     #FFF8F3;
+  --sand:      #F5EDE4;
+  --sand-dark: #E8D9CC;
+  --charcoal:  #1E1A18;
+  --gray-warm: #6B5E57;
+  --wpp:       #25D366;
+  --wpp-dark:  #1DA851;
+  --white:     #FFFFFF;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font-b);
+  background: var(--red);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* background texture */
+body::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.07) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+/* glow bottom */
+body::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(244,162,37,.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ══ ANIMATIONS ══ */
+@keyframes popIn {
+  0%   { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.08) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: .5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes countdown {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 126; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ══ CARD ══ */
+.card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  padding: 44px 32px 36px;
+  max-width: 400px;
+  width: calc(100% - 40px);
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,.2);
+}
+
+/* ══ EMOJI ICON ══ */
+.icon-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px; height: 88px;
+  margin: 0 auto 24px;
+  animation: popIn .6s cubic-bezier(.34,1.56,.64,1) .1s both;
+}
+.icon-wrap::before,
+.icon-wrap::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  animation: pulse-ring 2s ease-out infinite;
+}
+.icon-wrap::after { animation-delay: .6s; }
+.icon-bg {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px;
+  position: relative;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 8px 24px rgba(244,162,37,.4);
+}
+
+/* ══ HEADING ══ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 14px;
+  animation: fadeUp .5s .3s both;
+}
+.eyebrow .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--wpp);
+  flex-shrink: 0;
+}
+
+h1 {
+  font-family: var(--font-d);
+  font-size: clamp(26px, 6vw, 34px);
+  line-height: 1.2;
+  color: white;
+  margin-bottom: 12px;
+  animation: fadeUp .5s .4s both;
+}
+h1 em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,.72);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  animation: fadeUp .5s .5s both;
+}
+
+/* ══ PILLS ══ */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 28px;
+  animation: fadeUp .5s .55s both;
+}
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+}
+.pill .pi { font-size: 14px; }
+
+/* ══ CTA BUTTON ══ */
+.btn-wpp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--wpp);
+  color: white;
+  font-family: var(--font-b);
+  font-size: 16px;
+  font-weight: 800;
+  padding: 16px 28px;
+  border-radius: 50px;
+  box-shadow: 0 6px 24px rgba(37,211,102,.4);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s, box-shadow .18s;
+  animation: fadeUp .5s .65s both;
+  cursor: pointer;
+}
+.btn-wpp::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  background-size: 400px 100%;
+  animation: shimmer 2s infinite;
+}
+.btn-wpp:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,.5); }
+
+/* ══ REDIRECT NOTICE ══ */
+.redirect-notice {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: fadeUp .5s .75s both;
+}
+.redirect-text {
+  font-size: 12.5px;
+  color: rgba(255,255,255,.5);
+}
+.redirect-text strong { color: rgba(255,255,255,.75); }
+
+/* countdown ring */
+.ring-wrap {
+  position: relative;
+  width: 28px; height: 28px;
+  flex-shrink: 0;
+}
+.ring-wrap svg {
+  transform: rotate(-90deg);
+  width: 28px; height: 28px;
+}
+.ring-track { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 3; }
+.ring-fill {
+  fill: none;
+  stroke: var(--amber);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 126;
+  stroke-dashoffset: 0;
+  animation: countdown 5s linear forwards;
+}
+.ring-num {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: rgba(255,255,255,.8);
+}
+
+/* ══ LOGO FOOTER ══ */
+.logo-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 28px;
+  text-align: center;
+  animation: fadeUp .5s .85s both;
+}
+.logo-footer span {
+  font-family: var(--font-d);
+  font-size: 14px;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .04em;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="icon-wrap">
+    <div class="icon-bg">🛵</div>
+  </div>
+
+  <div class="eyebrow">
+    <span class="dot"></span>
+    Pedido recebido
+  </div>
+
+  <h1>Seu pedido vai chegar<br><em>rapidinho!</em></h1>
+
+  <p class="subtitle">
+    Já estamos te esperando no WhatsApp.<br>
+    Atendimento de primeira, do início ao fim. 😊
+  </p>
+
+  <div class="pills">
+    <div class="pill"><span class="pi">🕐</span> Resposta em minutos</div>
+    <div class="pill"><span class="pi">📍</span> Toda Bragança</div>
+    <div class="pill"><span class="pi">💚</span> Taxa fixa R$9,90</div>
+  </div>
+
+  <a id="wpp-btn" href="https://wa.me/551140345000?text=Olá!%20Vim%20pelo%20Google%20e%20gostaria%20de%20fazer%20um%20pedido%20delivery%20%F0%9F%9B%B5" class="btn-wpp" target="_blank" rel="noopener">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.854L0 24l6.337-1.496A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.802 9.802 0 01-5.001-1.371l-.359-.214-3.721.878.938-3.63-.234-.373A9.79 9.79 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+    Abrir WhatsApp agora
+  </a>
+
+  <div class="redirect-notice">
+    <div class="ring-wrap">
+      <svg viewBox="0 0 40 40">
+        <circle class="ring-track" cx="20" cy="20" r="17"/>
+        <circle class="ring-fill" cx="20" cy="20" r="17"/>
+      </svg>
+      <div class="ring-num" id="count">5</div>
+    </div>
+    <p class="redirect-text">Abrindo o WhatsApp em <strong id="count-text">5s</strong> automaticamente</p>
+  </div>
+
+</div>
+
+<div class="logo-footer">
+  <span>Farma Fácil · Bragança Paulista</span>
+</div>
+
+<script>
+  const WPP_URL = 'https://wa.me/551140345000?text=Ol%C3%A1!%20Vim%20pelo%20Google%20e%20gostaria%20de%20fazer%20um%20pedido%20delivery%20%F0%9F%9B%B5';
+  let seconds = 5;
+  const countEl  = document.getElementById('count');
+  const countTxt = document.getElementById('count-text');
+
+  const timer = setInterval(() => {
+    seconds--;
+    countEl.textContent  = seconds;
+    countTxt.textContent = seconds + 's';
+    if (seconds <= 0) {
+      clearInterval(timer);
+      window.location.href = WPP_URL;
+    }
+  }, 1000);
+
+  // se clicar no botão, cancela o timer
+  document.getElementById('wpp-btn').addEventListener('click', () => clearInterval(timer));
+</script>
+
+</body>
+</html>
