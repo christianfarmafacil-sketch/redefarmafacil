@@ -3,591 +3,1059 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Farma Fácil — A farmácia da sua família em Bragança Paulista. Site em construção.">
-<title>Farma Fácil — Em Breve</title>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap" rel="stylesheet">
+<meta name="description" content="Farma Fácil — Delivery em Bragança Paulista. Taxa fixa R$9,90. Todos os dias até 23h. Peça pelo WhatsApp!">
+<title>Farma Fácil · Delivery em Bragança Paulista</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* ══════════════════════════════════════
+   TOKENS
+══════════════════════════════════════ */
+:root {
+  --red:        #C8171A;
+  --red-dark:   #8C0E11;
+  --red-soft:   #F2564A;
+  --red-blush:  #FBE8E7;
+  --amber:      #F4A225;
+  --amber-dark: #C47D08;
+  --teal:       #2A9D8F;
+  --cream:      #FFF8F3;
+  --sand:       #F5EDE4;
+  --sand-dark:  #E8D9CC;
+  --charcoal:   #1E1A18;
+  --gray-warm:  #6B5E57;
+  --gray-light: #C4B8B1;
+  --wpp:        #25D366;
+  --wpp-dark:   #1DA851;
+  --white:      #FFFFFF;
+  --font-d: 'Playfair Display', Georgia, serif;
+  --font-b: 'Plus Jakarta Sans', sans-serif;
+  --shadow-sm: 0 2px 12px rgba(30,26,24,.08);
+  --shadow-md: 0 6px 28px rgba(30,26,24,.13);
+  --shadow-lg: 0 16px 48px rgba(30,26,24,.18);
+  --radius:  14px;
+  --radius-sm: 8px;
+}
 
-  :root {
-    --red:        #CC0000;
-    --red-dark:   #8B0000;
-    --red-mid:    #E50000;
-    --red-light:  #FF3333;
-    --black:      #0A0A0A;
-    --black-mid:  #141414;
-    --black-soft: #1E1E1E;
-    --white:      #FFFFFF;
-    --off-white:  #F5F5F5;
-    --gray:       #AAAAAA;
-    --gray-dim:   #555555;
-  }
+/* ══════════════════════════════════════
+   RESET / BASE
+══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b);
+  background: var(--cream);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
 
-  html, body {
-    height: 100%;
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    background: var(--black);
-    color: var(--white);
-    overflow-x: hidden;
-  }
+/* ══════════════════════════════════════
+   UTILITIES
+══════════════════════════════════════ */
+.container { width: 100%; max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
 
-  /* ── BACKGROUND ── */
-  .bg-wrapper {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .bg-halftone {
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(204,0,0,.13) 1.5px, transparent 1.5px);
-    background-size: 38px 38px;
-  }
-  .bg-slash {
-    position: absolute;
-    top: 0; right: 0;
-    width: 45%;
-    height: 100%;
-    background: linear-gradient(175deg, var(--red-dark) 0%, var(--red) 60%, var(--red-dark) 100%);
-    clip-path: polygon(18% 0%, 100% 0%, 100% 100%, 0% 100%);
-    opacity: 0.12;
-  }
-  .bg-slash-line {
-    position: absolute;
-    top: 0; right: 0;
-    width: 45%;
-    height: 100%;
-    clip-path: polygon(18% 0%, 19.5% 0%, 1.5% 100%, 0% 100%);
-    background: var(--red);
-    opacity: 0.35;
-  }
-  .bg-top-bar {
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-dark));
-  }
-  .bg-bottom-bar {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 4px;
-    background: var(--red);
-    opacity: 0.5;
-  }
-  .bg-corner-glow {
-    position: absolute;
-    bottom: -200px; left: -200px;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(204,0,0,.14) 0%, transparent 70%);
-    filter: blur(40px);
-  }
-  .bg-top-glow {
-    position: absolute;
-    top: -150px; right: 5%;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(204,0,0,.1) 0%, transparent 70%);
-    filter: blur(50px);
-  }
+/* ══════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: .6; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes badge-pop {
+  0%   { transform: scale(0.5) rotate(-8deg); opacity: 0; }
+  70%  { transform: scale(1.1) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes tick {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
 
-  /* ── LAYOUT ── */
-  .page {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 24px 140px;
-    gap: 0;
-  }
+.fade-up { animation: fadeUp .6s ease both; }
+.fade-up-1 { animation-delay: .1s; }
+.fade-up-2 { animation-delay: .22s; }
+.fade-up-3 { animation-delay: .34s; }
+.fade-up-4 { animation-delay: .46s; }
+.fade-up-5 { animation-delay: .58s; }
 
-  /* ── LOGO ── */
-  .logo-wrap {
-    margin-bottom: 48px;
-    animation: fadeDown .8s ease both;
-  }
-  .logo-wrap img {
-    height: 90px;
-    object-fit: contain;
-    filter: drop-shadow(0 4px 24px rgba(204,0,0,.4));
-  }
+/* ══════════════════════════════════════
+   TOPBAR
+══════════════════════════════════════ */
+.topbar {
+  background: var(--red-dark);
+  padding: 9px 20px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  letter-spacing: .03em;
+}
+.topbar span { color: var(--amber); }
 
-  /* ── BADGE ── */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(204,0,0,.15);
-    border: 1px solid rgba(204,0,0,.4);
-    color: var(--red-light);
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    padding: 10px 24px;
-    margin-bottom: 32px;
-    animation: fadeDown .8s .1s ease both;
-  }
-  .badge-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--red-light);
-    animation: pulse 2s infinite;
-  }
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  background: var(--red);
+  position: relative;
+  overflow: hidden;
+  padding: 48px 0 72px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.07) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 52px;
+  background: var(--cream);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
 
-  /* ── HEADLINE ── */
-  .headline {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(52px, 8vw, 110px);
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 0.9;
-    letter-spacing: -2px;
-    text-align: center;
-    margin-bottom: 28px;
-    animation: fadeDown .8s .2s ease both;
-  }
-  .headline .red { color: var(--red-light); }
-  .headline .outline {
-    -webkit-text-stroke: 2px rgba(255,255,255,.2);
-    color: transparent;
-  }
+/* diagonal accent */
+.hero-accent {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,162,37,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
 
-  /* ── SLOGAN ── */
-  .slogan {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(16px, 2.5vw, 22px);
-    font-weight: 300;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--gray);
-    text-align: center;
-    margin-bottom: 20px;
-    animation: fadeDown .8s .25s ease both;
-  }
+.hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  position: relative;
+}
+.hero-logo-mark {
+  width: 44px; height: 44px;
+  background: white;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  flex-shrink: 0;
+}
+.hero-logo-text { line-height: 1.15; }
+.hero-logo-img {
+  display: block;
+  max-height: 86px;
+  width: auto;
+}
+.hero-logo-text span {
+  font-size: 11px;
+  color: rgba(255,255,255,.65);
+  font-weight: 500;
+  letter-spacing: .04em;
+}
 
-  /* ── DIVIDER ── */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 40px;
-    animation: fadeDown .8s .3s ease both;
-  }
-  .div-line { flex: 1; max-width: 120px; height: 1px; background: rgba(255,255,255,.12); }
-  .div-icon { font-size: 18px; opacity: 0.5; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  letter-spacing: .04em;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: block;
+  animation: pulse-ring 1.5s ease infinite;
+  box-shadow: 0 0 0 0 var(--amber);
+}
 
-  /* ── SUBTITLE ── */
-  .subtitle {
-    font-size: clamp(16px, 2vw, 22px);
-    font-weight: 300;
-    color: rgba(255,255,255,.55);
-    text-align: center;
-    line-height: 1.7;
-    max-width: 560px;
-    margin-bottom: 64px;
-    animation: fadeDown .8s .35s ease both;
-  }
-  .subtitle strong { color: rgba(255,255,255,.85); font-weight: 700; }
+.hero h1 {
+  font-family: var(--font-d);
+  font-size: clamp(30px, 7vw, 42px);
+  line-height: 1.15;
+  color: white;
+  margin-bottom: 16px;
+  position: relative;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--amber);
+}
 
-  /* ── PROGRESS BAR ── */
-  .progress-wrap {
-    width: 100%;
-    max-width: 480px;
-    margin-bottom: 72px;
-    animation: fadeDown .8s .4s ease both;
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.3);
-  }
-  .progress-label span { color: var(--red-light); }
-  .progress-track {
-    height: 4px;
-    background: rgba(255,255,255,.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light));
-    border-radius: 2px;
-    transition: width 2s 1s cubic-bezier(.4,0,.2,1);
-  }
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,.78);
+  line-height: 1.6;
+  max-width: 480px;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
 
-  /* ── CONTACT LABEL ── */
-  .contact-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.3);
-    margin-bottom: 24px;
-    text-align: center;
-    animation: fadeDown .8s .45s ease both;
-  }
+/* ══════════════════════════════════════
+   BADGE DE TAXA
+══════════════════════════════════════ */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 24px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  animation: badge-pop .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+.badge:nth-child(1) { animation-delay: .3s; }
+.badge:nth-child(2) { animation-delay: .42s; }
+.badge:nth-child(3) { animation-delay: .54s; }
+.badge .icon { font-size: 15px; }
+.badge.highlight {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--charcoal);
+}
 
-  /* ── BUTTONS ── */
-  .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    max-width: 700px;
-    margin-bottom: 20px;
-    animation: fadeDown .8s .5s ease both;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 18px 32px;
-    border-radius: 2px;
-    font-size: 16px;
-    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-    cursor: pointer;
-    border: none;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,.06);
-    opacity: 0;
-    transition: opacity .15s;
-  }
-  .btn:hover::after { opacity: 1; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn:active { transform: translateY(0); }
+/* ══════════════════════════════════════
+   CTA WHATSAPP — HERO
+══════════════════════════════════════ */
+.btn-wpp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--wpp);
+  color: white;
+  font-family: var(--font-b);
+  font-size: 17px;
+  font-weight: 800;
+  padding: 16px 32px;
+  border-radius: 50px;
+  box-shadow: 0 6px 24px rgba(37,211,102,.4);
+  transition: transform .18s ease, box-shadow .18s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  width: 100%;
+  max-width: 420px;
+}
+.btn-wpp::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  background-size: 400px 100%;
+  animation: shimmer 2.2s infinite;
+}
+.btn-wpp:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,.5); }
+.btn-wpp:active { transform: translateY(0); }
+.btn-wpp svg { flex-shrink: 0; }
 
-  .btn-whatsapp {
-    background: #25D366;
-    color: white;
-    box-shadow: 0 4px 20px rgba(37,211,102,.3);
-  }
-  .btn-whatsapp:hover { box-shadow: 0 8px 32px rgba(37,211,102,.45); }
+.btn-wpp-sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,.7);
+  margin-top: 10px;
+  text-align: center;
+}
 
-  .btn-phone {
-    background: var(--red);
-    color: white;
-    box-shadow: 0 4px 20px rgba(204,0,0,.35);
-  }
-  .btn-phone:hover { box-shadow: 0 8px 32px rgba(204,0,0,.5); }
+/* ══════════════════════════════════════
+   DIFERENCIAIS
+══════════════════════════════════════ */
+.diferenciais {
+  padding: 52px 0 44px;
+  background: var(--cream);
+}
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: var(--font-d);
+  font-size: clamp(22px, 5vw, 28px);
+  color: var(--charcoal);
+  margin-bottom: 32px;
+  line-height: 1.25;
+}
 
-  .btn-map {
-    background: rgba(255,255,255,.06);
-    color: rgba(255,255,255,.85);
-    border: 1px solid rgba(255,255,255,.12);
-    box-shadow: none;
-  }
-  .btn-map:hover {
-    background: rgba(255,255,255,.1);
-    border-color: rgba(255,255,255,.22);
-  }
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 400px) {
+  .cards-grid { grid-template-columns: 1fr; }
+}
 
-  .btn-icon { font-size: 20px; flex-shrink: 0; }
-  .btn-text { display: flex; flex-direction: column; gap: 1px; text-align: left; }
-  .btn-main { font-size: 15px; font-weight: 700; line-height: 1.2; }
-  .btn-sub { font-size: 11px; font-weight: 400; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
+.card {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--sand-dark);
+  padding: 22px 18px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+  animation: float 3.5s ease-in-out infinite;
+}
+.card:nth-child(2) .card-icon { animation-delay: .5s; }
+.card:nth-child(3) .card-icon { animation-delay: 1s; }
+.card:nth-child(4) .card-icon { animation-delay: 1.5s; }
+.card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+.card p {
+  font-size: 13px;
+  color: var(--gray-warm);
+  line-height: 1.55;
+}
+.card.featured {
+  background: var(--red);
+  border-color: var(--red);
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+}
+@media (max-width: 400px) {
+  .card.featured { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+}
+.card.featured .card-icon { margin-bottom: 0; font-size: 32px; animation: none; flex-shrink: 0; }
+.card.featured h3 { color: white; font-size: 16px; }
+.card.featured p { color: rgba(255,255,255,.75); }
+.card.featured .price-tag {
+  margin-left: auto;
+  flex-shrink: 0;
+  text-align: center;
+}
+@media (max-width: 400px) {
+  .card.featured .price-tag { margin-left: 0; }
+}
+.price-tag .amount {
+  display: block;
+  font-family: var(--font-d);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+}
+.price-tag .label {
+  font-size: 11px;
+  color: rgba(255,255,255,.65);
+  font-weight: 500;
+}
 
-  /* ── ACCESS NOTE ── */
-  .access-note {
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(255,255,255,.25);
-    text-align: center;
-    letter-spacing: 1px;
-    animation: fadeDown .8s .55s ease both;
-    margin-bottom: 0;
-  }
+/* ══════════════════════════════════════
+   COMO PEDIR
+══════════════════════════════════════ */
+.como-pedir {
+  padding: 44px 0;
+  background: var(--sand);
+  border-top: 1px solid var(--sand-dark);
+  border-bottom: 1px solid var(--sand-dark);
+}
 
-  /* ── FOOTER ── */
-  footer {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    z-index: 10;
-    background: rgba(10,10,10,.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(255,255,255,.06);
-    padding: 20px 32px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .footer-red-bar {
-    width: 3px;
-    height: 36px;
-    background: var(--red);
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-  .footer-brand {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255,255,255,.7);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    line-height: 1.3;
-  }
-  .footer-cnpj {
-    font-size: 11px;
-    font-weight: 300;
-    color: rgba(255,255,255,.25);
-    letter-spacing: 1px;
-    margin-top: 2px;
-  }
-  .footer-sep {
-    width: 1px; height: 32px;
-    background: rgba(255,255,255,.08);
-  }
-  .footer-hours {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .footer-hours-item {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(255,255,255,.3);
-    letter-spacing: 0.5px;
-  }
-  .footer-hours-item strong { color: rgba(255,255,255,.55); font-weight: 700; }
-  .footer-right {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(255,255,255,.2);
-    letter-spacing: 0.5px;
-    text-align: right;
-    line-height: 1.6;
-  }
-  .footer-right strong { color: rgba(255,255,255,.35); }
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 19px; top: 52px;
+  width: 2px;
+  height: calc(100% - 36px);
+  background: var(--sand-dark);
+}
+.step-num {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(200,23,26,.3);
+}
+.step-body h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 3px;
+}
+.step-body p {
+  font-size: 13.5px;
+  color: var(--gray-warm);
+  line-height: 1.5;
+}
+.step-body strong { color: var(--red); }
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-  @keyframes scanline {
-    from { transform: translateY(-100%); }
-    to   { transform: translateY(100vh); }
-  }
-  .scanline {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-    background: linear-gradient(180deg,
-      transparent 0%,
-      rgba(204,0,0,.015) 50%,
-      transparent 100%
-    );
-    background-size: 100% 8px;
-    animation: none;
-    opacity: 0.4;
-  }
+/* ══════════════════════════════════════
+   DEPOIMENTOS
+══════════════════════════════════════ */
+.depoimentos {
+  padding: 52px 0 44px;
+  background: var(--cream);
+}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .page { padding: 60px 20px 130px; }
-    .logo-wrap img { height: 68px; }
-    .headline { letter-spacing: -1px; }
-    .buttons { gap: 12px; }
-    .btn { padding: 16px 24px; width: 100%; max-width: 340px; }
-    footer { padding: 16px 20px; }
-    .footer-sep { display: none; }
-    .footer-right { font-size: 11px; }
-  }
-  @media (max-width: 400px) {
-    .headline { font-size: 44px; }
-  }
+.stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.star { color: var(--amber); font-size: 14px; }
+
+.reviews-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.review {
+  background: white;
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.review::before {
+  content: '"';
+  position: absolute;
+  top: 10px; right: 16px;
+  font-family: var(--font-d);
+  font-size: 48px;
+  color: var(--red-blush);
+  line-height: 1;
+}
+.review-text {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.review-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.review-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+.review-meta {
+  font-size: 11px;
+  color: var(--gray-warm);
+}
+
+.rating-summary {
+  background: var(--red);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.rating-summary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.07) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+.rating-score {
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.rating-score .score {
+  font-family: var(--font-d);
+  font-size: 44px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  display: block;
+}
+.rating-score .out-of {
+  font-size: 12px;
+  color: rgba(255,255,255,.6);
+}
+.rating-text { position: relative; }
+.rating-text .stars { margin-bottom: 4px; }
+.rating-text p {
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.5;
+}
+.rating-text strong { color: white; }
+
+/* ══════════════════════════════════════
+   LOJAS / MAPA
+══════════════════════════════════════ */
+.lojas {
+  padding: 44px 0;
+  background: var(--sand);
+  border-top: 1px solid var(--sand-dark);
+}
+
+.lojas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+@media (max-width: 420px) {
+  .lojas-grid { grid-template-columns: 1fr; }
+}
+
+.loja-card {
+  background: white;
+  border: 1px solid var(--sand-dark);
+  border-top: 4px solid var(--red);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.loja-tag {
+  display: inline-block;
+  background: var(--red-blush);
+  color: var(--red);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.loja-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+.loja-card p {
+  font-size: 12.5px;
+  color: var(--gray-warm);
+  line-height: 1.55;
+}
+.loja-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.mapa-embed {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--sand-dark);
+  box-shadow: var(--shadow-sm);
+}
+.mapa-embed iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  display: block;
+}
+.mapa-placeholder {
+  width: 100%;
+  height: 200px;
+  background: var(--sand);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--gray-warm);
+  font-size: 14px;
+  cursor: pointer;
+}
+.mapa-placeholder span { font-size: 28px; }
+
+.horario-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.horario-pill .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--wpp);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(37,211,102,.2);
+}
+.horario-pill p {
+  font-size: 13px;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+.horario-pill strong { color: var(--red); }
+
+/* ══════════════════════════════════════
+   CTA FINAL
+══════════════════════════════════════ */
+.cta-final {
+  padding: 52px 0 60px;
+  background: var(--red-dark);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,.06) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+.cta-final-glow {
+  position: absolute;
+  bottom: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 200px;
+  background: radial-gradient(ellipse, rgba(244,162,37,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-final h2 {
+  font-family: var(--font-d);
+  font-size: clamp(24px, 6vw, 32px);
+  color: white;
+  margin-bottom: 10px;
+  position: relative;
+}
+.cta-final h2 em { font-style: italic; color: var(--amber); }
+.cta-final p {
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 32px;
+  line-height: 1.6;
+  position: relative;
+}
+.cta-final .btn-wpp { margin: 0 auto; position: relative; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background: var(--charcoal);
+  padding: 24px 20px;
+  text-align: center;
+}
+footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.7;
+}
+footer strong { color: rgba(255,255,255,.65); }
+
+/* ══════════════════════════════════════
+   FAB WHATSAPP (fixo mobile)
+══════════════════════════════════════ */
+.fab-wpp {
+  position: fixed;
+  bottom: 24px; right: 20px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--wpp);
+  color: white;
+  font-family: var(--font-b);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 13px 20px 13px 16px;
+  border-radius: 50px;
+  box-shadow: 0 6px 24px rgba(37,211,102,.45);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  animation: fadeUp .5s .8s both;
+}
+.fab-wpp:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
+.fab-wpp::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: var(--wpp);
+  animation: pulse-ring 2s ease-out infinite;
+  z-index: -1;
+}
 </style>
 </head>
 <body>
 
-<!-- Background layers -->
-<div class="bg-wrapper">
-  <div class="bg-halftone"></div>
-  <div class="bg-slash"></div>
-  <div class="bg-slash-line"></div>
-  <div class="bg-top-bar"></div>
-  <div class="bg-bottom-bar"></div>
-  <div class="bg-corner-glow"></div>
-  <div class="bg-top-glow"></div>
+<!-- ══ TOPBAR ══ -->
+<div class="topbar">
+  📦 Delivery em toda Bragança Paulista · Taxa fixa <span>R$9,90</span> · Todos os dias até as 23h
 </div>
-<div class="scanline"></div>
 
-<!-- Main content -->
-<main class="page">
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="container">
 
-  <!-- Logo -->
-  <div class="logo-wrap">
-    <img src="logo-farma-facil.png" alt="Farma Fácil — Rede de Farmácias">
-  </div>
-
-  <!-- Badge -->
-  <div class="badge">
-    <div class="badge-dot"></div>
-    Site em construção
-  </div>
-
-  <!-- Headline -->
-  <h1 class="headline">
-    Estamos <span class="red">preparando</span><br>
-    algo <span class="outline">especial</span><br>
-    para <span class="red">você.</span>
-  </h1>
-
-  <!-- Slogan -->
-  <p class="slogan">Perto de você, cuidando de você</p>
-
-  <!-- Divider -->
-  <div class="divider">
-    <div class="div-line"></div>
-    <div class="div-icon">❤️</div>
-    <div class="div-line"></div>
-  </div>
-
-  <!-- Subtitle -->
-  <p class="subtitle">
-    Em breve nosso site estará no ar com tudo que você precisa.<br>
-    <strong>Enquanto isso, estamos disponíveis pelos nossos canais.</strong>
-  </p>
-
-  <!-- Progress -->
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span>Progresso</span>
-      <span id="pct">0%</span>
+    <div class="hero-logo fade-up">
+      <div class="hero-logo-text">
+        <img src="/logo-farma-facil.png" alt="Farma Fácil" class="hero-logo-img" />
+        <span>Bragança Paulista · SP</span>
+      </div>
     </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="bar"></div>
+
+    <div class="hero-eyebrow fade-up fade-up-1">Delivery disponível agora</div>
+
+    <h1 class="fade-up fade-up-2">
+      Sua farmácia<br>
+      <em>entrega em casa.</em>
+    </h1>
+
+    <p class="hero-sub fade-up fade-up-3">
+      Cosméticos, perfumaria, higiene e muito mais.<br>
+      Peça pelo WhatsApp e receba hoje.
+    </p>
+
+    <div class="hero-badges fade-up fade-up-3">
+      <div class="badge highlight">
+        <span class="icon">🛵</span> Taxa fixa R$9,90
+      </div>
+      <div class="badge">
+        <span class="icon">🕐</span> Até as 23h
+      </div>
+      <div class="badge">
+        <span class="icon">📍</span> Toda Bragança
+      </div>
+    </div>
+
+    <div class="fade-up fade-up-4">
+      <a href="https://wa.me/551140345000?text=Olá!%20Vim%20pelo%20Google%20e%20gostaria%20de%20fazer%20um%20pedido%20delivery%20%F0%9F%9B%B5" class="btn-wpp" target="_blank" rel="noopener">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.854L0 24l6.337-1.496A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.802 9.802 0 01-5.001-1.371l-.359-.214-3.721.878.938-3.63-.234-.373A9.79 9.79 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Pedir pelo WhatsApp agora
+      </a>
+      <span class="btn-wpp-sub">Respondemos em minutos · (11) 4034-5000</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ DIFERENCIAIS ══ -->
+<section class="diferenciais">
+  <div class="container">
+    <span class="section-label fade-up">Por que a Farma Fácil?</span>
+    <h2 class="section-title fade-up">Tudo que você precisa,<br>sem sair de casa.</h2>
+
+    <div class="cards-grid">
+
+      <div class="card featured fade-up">
+        <span class="card-icon">🛵</span>
+        <div>
+          <h3>Taxa fixa em toda Bragança</h3>
+          <p>Entregamos em qualquer bairro de Bragança Paulista. Sem surpresa no valor.</p>
+        </div>
+        <div class="price-tag">
+          <span class="amount">R$9,90</span>
+          <span class="label">taxa fixa</span>
+        </div>
+      </div>
+
+      <div class="card fade-up fade-up-1">
+        <span class="card-icon">🕐</span>
+        <h3>Aberto até meia-noite</h3>
+        <p>Loja aberta das 8h às 00h. Delivery disponível todos os dias até as 23h.</p>
+      </div>
+
+      <div class="card fade-up fade-up-2">
+        <span class="card-icon">💬</span>
+        <h3>Pedido pelo WhatsApp</h3>
+        <p>Fala com a gente direto no chat. Simples, rápido e sem app pra baixar.</p>
+      </div>
+
+      <div class="card fade-up fade-up-3">
+        <span class="card-icon">💄</span>
+        <h3>Seção R$9,99</h3>
+        <p>Mais de 50 produtos de beleza, skincare e perfumaria por R$9,99 cada.</p>
+      </div>
+
+      <div class="card fade-up fade-up-4">
+        <span class="card-icon">📍</span>
+        <h3>2 lojas em Bragança</h3>
+        <p>Matadouro e Lava-pés. Se preferir retirar pessoalmente, é só escolher.</p>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- Contact label -->
-  <p class="contact-label">Acesse nossos canais de contato</p>
+<!-- ══ COMO PEDIR ══ -->
+<section class="como-pedir">
+  <div class="container">
+    <span class="section-label fade-up">É simples assim</span>
+    <h2 class="section-title fade-up">Como fazer seu pedido</h2>
 
-  <!-- Buttons -->
-  <div class="buttons">
-
-    <!-- WhatsApp -->
-    <a class="btn btn-whatsapp" href="https://wa.me/551140345000" target="_blank" rel="noopener">
-      <span class="btn-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-      </span>
-      <div class="btn-text">
-        <span class="btn-main">WhatsApp</span>
-        <span class="btn-sub">(11) 4034-5000</span>
+    <div class="steps">
+      <div class="step fade-up fade-up-1">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Clique no botão do WhatsApp</h3>
+          <p>Você vai direto para o nosso chat com uma mensagem já pronta. Não precisa digitar nada.</p>
+        </div>
       </div>
-    </a>
-
-    <!-- Ligação -->
-    <a class="btn btn-phone" href="tel:+551140345000">
-      <span class="btn-icon">📞</span>
-      <div class="btn-text">
-        <span class="btn-main">Ligar agora</span>
-        <span class="btn-sub">(11) 4034-5000</span>
+      <div class="step fade-up fade-up-2">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Fale o que você precisa</h3>
+          <p>Nosso time responde rápido e te ajuda a escolher. <strong>Cosméticos, higiene, perfumaria</strong> — é só pedir.</p>
+        </div>
       </div>
-    </a>
-
-    <!-- Loja 1 -->
-    <a class="btn btn-map"
-       href="https://maps.google.com/?q=Praça+Coronel+Jacinto+Osório+4+Matadouro+Bragança+Paulista"
-       target="_blank" rel="noopener">
-      <span class="btn-icon">📍</span>
-      <div class="btn-text">
-        <span class="btn-main">Loja 1 — Matadouro</span>
-        <span class="btn-sub">Pça. Cel. Jacinto Osório, 4</span>
+      <div class="step fade-up fade-up-3">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Confirme o endereço e pague</h3>
+          <p>Aceitamos Pix, cartão e dinheiro. Simples e seguro.</p>
+        </div>
       </div>
-    </a>
-
-    <!-- Loja 2 -->
-    <a class="btn btn-map"
-       href="https://maps.google.com/?q=Travessa+Dona+Carolina+196+Lava-pés+Bragança+Paulista"
-       target="_blank" rel="noopener">
-      <span class="btn-icon">📍</span>
-      <div class="btn-text">
-        <span class="btn-main">Loja 2 — Lava-pés</span>
-        <span class="btn-sub">Tv. Dona Carolina, 196</span>
+      <div class="step fade-up fade-up-4">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Receba em casa 🛵</h3>
+          <p>Taxa fixa de <strong>R$9,90</strong> em qualquer bairro de Bragança Paulista. Entrega rápida!</p>
+        </div>
       </div>
-    </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEPOIMENTOS ══ -->
+<section class="depoimentos">
+  <div class="container">
+    <span class="section-label fade-up">O que dizem nossos clientes</span>
+    <h2 class="section-title fade-up">Bragança confia na Farma Fácil</h2>
+
+    <div class="reviews-grid">
+
+      <div class="review fade-up fade-up-1">
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">Fiz o pedido pelo WhatsApp e chegou rapidinho! Não esperava que fosse tão fácil. Os produtos da seção R$9,99 são ótimos, comprei gloss e um óleo capilar. Com certeza vou pedir de novo.</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#FBE8E7">👩</div>
+          <div>
+            <div class="review-name">Ana Paula M.</div>
+            <div class="review-meta">Vila Maria · Cliente desde 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review fade-up fade-up-2">
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">Atendimento perfeito e entrega super rápida. A taxa de R$9,90 fixa é ótima, não importa o bairro. Já indiquei pra várias amigas!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#E8F5E9">👩‍🦱</div>
+          <div>
+            <div class="review-name">Camila R.</div>
+            <div class="review-meta">Jardim Paulista · Cliente desde 2023</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review fade-up fade-up-3">
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p class="review-text">Moro longe do centro e sempre tive dificuldade pra ir à farmácia. Agora peço pelo WhatsApp e chega em casa. Melhor serviço de delivery de farmácia que já vi em Bragança!</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#E3F2FD">👱‍♀️</div>
+          <div>
+            <div class="review-name">Fernanda L.</div>
+            <div class="review-meta">Nova Bragança · Cliente desde 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rating-summary fade-up">
+      <div class="rating-score">
+        <span class="score">4.9</span>
+        <span class="out-of">/ 5,0</span>
+      </div>
+      <div class="rating-text">
+        <div class="stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <p><strong>+200 avaliações</strong> no Google Meu Negócio.<br>A farmácia mais bem avaliada de Bragança Paulista.</p>
+      </div>
+    </div>
 
   </div>
+</section>
 
-  <p class="access-note">Abertos todos os dias das 8h à meia-noite · Delivery até as 23h por R$ 9,90</p>
+<!-- ══ LOJAS ══ -->
+<section class="lojas">
+  <div class="container">
+    <span class="section-label fade-up">Onde estamos</span>
+    <h2 class="section-title fade-up">Duas lojas em Bragança Paulista</h2>
 
-</main>
+    <div class="lojas-grid fade-up">
+      <div class="loja-card">
+        <span class="loja-tag">Loja 1</span>
+        <h3>Matadouro</h3>
+        <p>Pça. Coronel Jacinto Osório, 4<br>Matadouro · Bragança Paulista/SP<br>CEP 12910-330</p>
+        <a href="https://maps.google.com/?q=Praça+Coronel+Jacinto+Osório+4+Bragança+Paulista" target="_blank" class="loja-link">
+          📍 Ver no mapa
+        </a>
+      </div>
+      <div class="loja-card">
+        <span class="loja-tag">Loja 2</span>
+        <h3>Lava-pés</h3>
+        <p>Tv. Dona Carolina, 196<br>Lava-pés · Bragança Paulista/SP</p>
+        <a href="https://maps.google.com/?q=Travessa+Dona+Carolina+196+Bragança+Paulista" target="_blank" class="loja-link">
+          📍 Ver no mapa
+        </a>
+      </div>
+    </div>
 
-<!-- Footer fixo -->
+    <div class="mapa-embed fade-up">
+      <div class="mapa-placeholder" onclick="this.outerHTML='<iframe src=\'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.21572218766!2d-46.5385874238715!3d-22.94228113914213!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ceca201ac53c87%3A0x6c363fbfed50f276!2sPra%C3%A7a%20Coronel%20Jacinto%20Os%C3%B3rio%2C%204%20-%20Matadouro%2C%20Bragan%C3%A7a%20Paulista%20-%20SP%2C%2012910-330!5e0!3m2!1spt-BR!2sbr!4v1773404331599!5m2!1spt-BR!2sbr\' width=\'100%\' height=\'200\' style=\'border:none;display:block\' allowfullscreen loading=\'lazy\'></iframe>'">
+        <span>🗺️</span>
+        Toque para abrir o mapa
+      </div>
+    </div>
+
+    <div class="horario-pill fade-up">
+      <div class="dot"></div>
+      <p><strong>Aberto agora</strong> · Todos os dias das 8h às 00h · Delivery até as 23h · (11) 4034-5000</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ══ -->
+<section class="cta-final">
+  <div class="cta-final-glow"></div>
+  <div class="container">
+    <h2 class="fade-up">Pronta para <em>pedir agora?</em></h2>
+    <p class="fade-up fade-up-1">
+      É só mandar uma mensagem. A gente responde rapidinho<br>
+      e o delivery chega até você por R$9,90. 🛵
+    </p>
+    <a href="https://wa.me/551140345000?text=Olá!%20Vim%20pelo%20Google%20e%20gostaria%20de%20fazer%20um%20pedido%20delivery%20%F0%9F%9B%B5" class="btn-wpp fade-up fade-up-2" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.854L0 24l6.337-1.496A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.802 9.802 0 01-5.001-1.371l-.359-.214-3.721.878.938-3.63-.234-.373A9.79 9.79 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      Pedir pelo WhatsApp agora
+    </a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
 <footer>
-  <div class="footer-left">
-    <div class="footer-red-bar"></div>
-    <div>
-      <div class="footer-brand">RL.X Drogarias LTDA</div>
-      <div class="footer-cnpj">CNPJ 33.875.087/0002-80</div>
-    </div>
-    <div class="footer-sep"></div>
-    <div class="footer-hours">
-      <div class="footer-hours-item">🕛 <strong>Loja:</strong> todos os dias das 8h às 00h</div>
-      <div class="footer-hours-item">🛵 <strong>Delivery:</strong> todos os dias das 8h às 23h · R$ 9,90 fixo</div>
-    </div>
-  </div>
-  <div class="footer-right">
-    <strong>Rede Farma Fácil © 2026</strong><br>
-    Todos os direitos reservados
-  </div>
+  <p>
+    <strong>Farma Fácil · RL.X Drogarias LTDA</strong><br>
+    Loja 1: Pça. Cel. Jacinto Osório, 4 – Matadouro · Loja 2: Tv. Dona Carolina, 196 – Lava-pés<br>
+    Bragança Paulista – SP · (11) 4034-5000 · Todos os dias das 8h às 00h
+  </p>
 </footer>
 
+<!-- ══ FAB WHATSAPP (fixo) ══ -->
+<a href="https://wa.me/551140345000?text=Olá!%20Vim%20pelo%20Google%20e%20gostaria%20de%20fazer%20um%20pedido%20delivery%20%F0%9F%9B%B5" class="fab-wpp" target="_blank" rel="noopener" aria-label="Pedir pelo WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.523 5.854L0 24l6.337-1.496A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.802 9.802 0 01-5.001-1.371l-.359-.214-3.721.878.938-3.63-.234-.373A9.79 9.79 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+  Pedir agora
+</a>
+
+<!-- ══ SCROLL ANIMATION OBSERVER ══ -->
 <script>
-  // Animate progress bar on load
-  window.addEventListener('load', () => {
-    const bar = document.getElementById('bar');
-    const pct = document.getElementById('pct');
-    const target = 72;
-    bar.style.width = target + '%';
-    let current = 0;
-    const step = () => {
-      if (current < target) {
-        current = Math.min(current + 1, target);
-        pct.textContent = current + '%';
-        requestAnimationFrame(step);
-      }
-    };
-    setTimeout(step, 1000);
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.animationPlayState = 'running';
+      obs.unobserve(e.target);
+    }
   });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  obs.observe(el);
+});
 </script>
 
 </body>
